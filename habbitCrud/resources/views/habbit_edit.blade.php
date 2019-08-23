@@ -31,7 +31,7 @@
                       </td> 
                       <td>
                         
-                        <button type="submit" class="btn btn-success" >Update</button>
+                        <button type="submit" class="btn btn-success" >Update Habbit</button>
                       </a>
                       </td>
                     </tr>
