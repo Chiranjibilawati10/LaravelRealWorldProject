@@ -10,10 +10,13 @@ class MyHabbitController extends Controller
 {
     function index()
     {
-     return view('habbit_list');
+      
+      $habbitData = MyHabbit::orderBy('created_at', 'DESC')->where(['softDelete'=>0])->get();
+    
+        return view('habbit_list', compact(['habbitData']));
     }
 
-    function insert(Request $request)
+    function store(Request $request)
     {
      if($request->ajax())
      {
@@ -43,5 +46,32 @@ class MyHabbitController extends Controller
        'success'  => 'Data Added successfully.'
       ]);
      }
+    }
+
+    function edit($id){
+
+      $habbitData = MyHabbit::findOrFail($id);
+    
+      return view('habbit_edit', compact(['habbitData']));
+    }
+
+    function update(Request $request, $id){
+      
+      $update = MyHabbit::findOrFail($id);
+    
+        $update->name = $request->name;
+        $updateData = $update->update();
+        
+        return redirect('habbit_list');
+        
+    }
+
+    function delete($id){
+
+      $delete = MyHabbit::findOrFail($id);
+           $delete->softDelete = 1;
+           $myDel = $delete->update();
+           
+           return back();
     }
 }

@@ -16,6 +16,7 @@ class CreateMyHabbitsTable extends Migration
         Schema::create('my_habbits', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->boolean('softDelete')->default(0);
             $table->timestamps();
         });
     }
